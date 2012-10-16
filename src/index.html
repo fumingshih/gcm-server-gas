@@ -1,0 +1,31 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>GCMSender</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>
+    $(function() {
+      $('#send input[type="submit"]').click(function(e) {
+        e.preventDefault();
+        $('#result').html("GCM sending...");
+        google.script.run.withSuccessHandler(onPostSuccess).sendGCMMessage(this.parentNode);
+      });
+    });
+
+    function onPostSuccess(result) {
+      $('#result').html(result.message);
+    }
+  </script>
+</head>
+
+<body>
+  <div id="send">
+    <form>
+      <input type="text" name="text">
+      <input type="submit" value="GCM send">
+    </form>
+  </div>
+  <div id="result"></div>
+</body>
+</html>
